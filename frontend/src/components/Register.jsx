@@ -6,8 +6,7 @@ const Register = ({ onToggleForm }) => {
     name: '',
     surname: '',
     email: '',
-    password: '',
-    passwordConfirmation: ''
+    password: ''
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -28,17 +27,10 @@ const Register = ({ onToggleForm }) => {
     setError('');
     setValidationErrors({});
 
-    if (formData.password !== formData.passwordConfirmation) {
-      setError('Passwords do not match');
-      setLoading(false);
-      return;
-    }
-
     const result = await register(
       formData.name,
       formData.email,
-      formData.password,
-      formData.passwordConfirmation
+      formData.password
     );
     
     if (!result.success) {
@@ -213,6 +205,7 @@ const Register = ({ onToggleForm }) => {
               <p className="mt-1 text-sm text-red-600">{validationErrors.password[0]}</p>
             )}
           </div>
+
 
           {error && (
             <div className="rounded-md bg-red-50 p-4">
