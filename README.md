@@ -200,7 +200,7 @@ This project is created as part of a technical assessment for CreativeX Tech Lab
 
 ## 📧 Contact
 
-For questions about this project, please contact: creativextechlabsinc@gmail.com
+For questions about this project, please contact: dev.bimrochee@gmail.com
 
 ---
 
