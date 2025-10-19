@@ -1,60 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import api from './api/api.js'
+import React, { useState } from 'react';
+import { AuthProvider, useAuth } from './contexts/AuthContext.jsx';
+import Login from './components/Login.jsx';
+import Register from './components/Register.jsx';
+import Dashboard from './components/Dashboard.jsx';
 
-function App() {
-  const [count, setCount] = useState(0)
-  const [apiStatus, setApiStatus] = useState('Not tested')
+function AppContent() {
+  const { isAuthenticated, loading } = useAuth();
+  const [isLogin, setIsLogin] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const testAPI = async () => {
-    try {
-      const response = await api.get('/');
-      setApiStatus('API connected successfully!');
-      console.log('API Response:', response.data);
-    } catch (error) {
-      setApiStatus('API connection failed: ' + error.message);
-      console.error('API Error:', error);
-    }
+  const handleToggleForm = (newIsLogin) => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setIsLogin(newIsLogin);
+      setIsTransitioning(false);
+    }, 150);
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isAuthenticated) {
+    return <Dashboard />;
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-      <div className="flex space-x-4 mb-8">
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo hover:opacity-80 transition-opacity" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react hover:opacity-80 transition-opacity" alt="React logo" />
-        </a>
+    <div className="relative">
+      <div 
+        className={`transition-all duration-300 ease-in-out ${
+          isTransitioning ? 'opacity-0 transform scale-95' : 'opacity-100 transform scale-100'
+        }`}
+      >
+        {isLogin ? (
+          <Login onToggleForm={() => handleToggleForm(false)} />
+        ) : (
+          <Register onToggleForm={() => handleToggleForm(true)} />
+        )}
       </div>
-      <h1 className="text-4xl font-bold text-gray-800 mb-8">Vite + React + Tailwind</h1>
-      <div className="bg-white p-6 rounded-lg shadow-lg">
-        <button 
-          onClick={() => setCount((count) => count + 1)}
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-colors mr-4"
-        >
-          count is {count}
-        </button>
-        <button 
-          onClick={testAPI}
-          className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded transition-colors"
-        >
-          Test API Connection
-        </button>
-        <p className="mt-4 text-gray-600">
-          API Status: <span className="font-semibold">{apiStatus}</span>
-        </p>
-        <p className="mt-2 text-gray-600">
-          Edit <code className="bg-gray-100 px-2 py-1 rounded">src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="mt-8 text-gray-500">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
-  )
+  );
 }
 
-export default App
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
+  );
+}
+
+export default App;
