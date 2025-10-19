@@ -34,17 +34,16 @@ const Login = ({ onToggleForm }) => {
 
   return (
     <div className="h-screen w-screen bg-white flex items-center justify-center px-4 sm:px-6 lg:px-8 fixed inset-0">
-      <div className="w-[400px] h-[362px] space-y-8">
+      <div className="w-full max-w-[400px] min-h-[362px] space-y-8">
         <div 
-          className="flex flex-col items-center"
+          className="flex flex-col items-center w-full"
           style={{
-            width: '400px',
-            height: '60px',
+            minHeight: '60px',
             gap: '8px',
             opacity: '1'
           }}
         >
-          <h2 className="w-[400px] h-[32px] text-center text-[#121419]" style={{
+          <h2 className="w-full text-center text-[#121419]" style={{
             fontFamily: 'Poppins, sans-serif',
             fontWeight: 700,
             fontSize: '28px',
@@ -67,13 +66,13 @@ const Login = ({ onToggleForm }) => {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="w-[400px] h-[50px] text-gray-900 focus:outline-none"
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              className="w-full h-[50px] text-gray-900 focus:outline-none"
                 placeholder="Email or Username"
                 value={formData.email}
                 onChange={handleChange}
@@ -98,13 +97,13 @@ const Login = ({ onToggleForm }) => {
               />
             </div>
             <div>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="w-[400px] h-[50px] text-gray-900 focus:outline-none"
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              required
+              className="w-full h-[50px] text-gray-900 focus:outline-none"
                 placeholder="Password"
                 value={formData.password}
                 onChange={handleChange}
@@ -137,13 +136,12 @@ const Login = ({ onToggleForm }) => {
           )}
 
           <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="flex justify-center items-center focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              style={{
-                width: '400px',
-                height: '50px',
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full flex justify-center items-center focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            style={{
+              height: '50px',
                 borderRadius: '16px',
                 backgroundColor: '#121419',
                 opacity: '1',
@@ -193,9 +191,8 @@ const Login = ({ onToggleForm }) => {
         <div>
           <button
             onClick={onToggleForm}
-            className="flex justify-center items-center focus:outline-none transition-colors"
+            className="w-full flex justify-center items-center focus:outline-none transition-colors"
             style={{
-              width: '400px',
               height: '50px',
               borderRadius: '16px',
               borderWidth: '1.5px',

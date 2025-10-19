@@ -46,24 +46,22 @@ const Register = ({ onToggleForm }) => {
   return (
     <div className="h-screen w-screen bg-white flex items-center justify-center px-4 sm:px-6 lg:px-8 fixed inset-0">
       <div 
-        className="relative"
+        className="relative w-full max-w-[400px]"
         style={{
-          width: '400px',
           height: 'auto',
           minHeight: '437px',
           opacity: '1'
         }}
       >
         <div 
-          className="flex flex-col items-center"
+          className="flex flex-col items-center w-full"
           style={{
-            width: '400px',
-            height: '32px',
+            minHeight: '32px',
             gap: '8px',
             opacity: '1'
           }}
         >
-          <h2 className="w-[400px] h-[32px] text-center text-[#121419]" style={{
+          <h2 className="w-full text-center text-[#121419]" style={{
             fontFamily: 'Poppins, sans-serif',
             fontWeight: 700,
             fontSize: '28px',
@@ -74,9 +72,9 @@ const Register = ({ onToggleForm }) => {
           </h2>
         </div>
         
-        <form className="flex flex-col items-center" onSubmit={handleSubmit} style={{ width: '400px', gap: '16px', marginTop: '32px' }}>
+        <form className="flex flex-col items-center w-full" onSubmit={handleSubmit} style={{ gap: '16px', marginTop: '32px' }}>
           {/* Firstname and Surname Row */}
-          <div className="flex gap-4" style={{ width: '400px' }}>
+          <div className="flex gap-4 w-full">
             <div>
               <input
                 id="name"
@@ -84,7 +82,7 @@ const Register = ({ onToggleForm }) => {
                 type="text"
                 autoComplete="given-name"
                 required
-                className="w-[192px] h-[50px] text-gray-900 focus:outline-none"
+                className="w-full h-[50px] text-gray-900 focus:outline-none"
                 placeholder="Firstname"
                 value={formData.name}
                 onChange={handleChange}
@@ -117,7 +115,7 @@ const Register = ({ onToggleForm }) => {
                 type="text"
                 autoComplete="family-name"
                 required
-                className="w-[192px] h-[50px] text-gray-900 focus:outline-none"
+                className="w-full h-[50px] text-gray-900 focus:outline-none"
                 placeholder="Surname"
                 value={formData.surname || ''}
                 onChange={handleChange}
@@ -148,7 +146,7 @@ const Register = ({ onToggleForm }) => {
               type="email"
               autoComplete="email"
               required
-              className="w-[400px] h-[50px] text-gray-900 focus:outline-none"
+                className="w-full h-[50px] text-gray-900 focus:outline-none"
               placeholder="Email Address"
               value={formData.email}
               onChange={handleChange}
@@ -181,7 +179,7 @@ const Register = ({ onToggleForm }) => {
               type="password"
               autoComplete="new-password"
               required
-              className="w-[400px] h-[50px] text-gray-900 focus:outline-none"
+                className="w-full h-[50px] text-gray-900 focus:outline-none"
               placeholder="Password"
               value={formData.password}
               onChange={handleChange}
@@ -214,14 +212,13 @@ const Register = ({ onToggleForm }) => {
           )}
 
           {/* Create Account Button */}
-          <div style={{ width: '400px', marginTop: '16px' }}>
+          <div className="w-full" style={{ marginTop: '16px' }}>
             <button
               type="submit"
               disabled={loading}
-              className="flex justify-center items-center text-white focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              style={{
-                width: '400px',
-                height: '50px',
+            className="w-full flex justify-center items-center text-white focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            style={{
+              height: '50px',
                 borderRadius: '16px',
                 backgroundColor: '#121419',
                 opacity: '1',
@@ -244,9 +241,8 @@ const Register = ({ onToggleForm }) => {
 
           {/* Terms & Conditions */}
           <div
-            className="text-center"
+            className="text-center w-full"
             style={{
-              width: '377px',
               height: '20px',
               opacity: '1',
               fontFamily: 'Poppins, sans-serif',
@@ -264,9 +260,8 @@ const Register = ({ onToggleForm }) => {
 
           {/* Login Link */}
           <div
-            className="text-center"
+            className="text-center w-full"
             style={{
-              width: '377px',
               height: '20px',
               fontFamily: 'Poppins, sans-serif',
               fontWeight: '400',

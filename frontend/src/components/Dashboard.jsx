@@ -84,16 +84,13 @@ const Dashboard = () => {
 
       {/* Navigation */}
       <nav className="bg-white sticky top-0 z-10">
-        <div 
-          className="mx-auto"
-          style={{
-            width: '1344px',
-            height: '64px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between'
-          }}
-        >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div 
+            className="flex items-center justify-between"
+            style={{
+              height: '64px'
+            }}
+          >
           <div className="flex items-center">
             <h1 
               style={{
@@ -179,11 +176,12 @@ const Dashboard = () => {
               Logout
             </button>
           </div>
+          </div>
         </div>
       </nav>
 
       {/* Main Content */}
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Tweet Form */}
         <TweetForm onTweetCreated={handleTweetCreated} />
 

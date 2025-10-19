@@ -46,18 +46,17 @@ const Tweet = ({ tweet, onTweetUpdated }) => {
 
   return (
     <div 
-      className="bg-white hover:bg-gray-50 transition-colors"
+      className="bg-white hover:bg-gray-50 transition-colors w-full"
       style={{
-        width: '653px',
-        height: '172px',
+        minHeight: '172px',
         padding: '16px'
       }}
     >
       {/* Inner Container */}
       <div 
+        className="w-full"
         style={{
-          width: '599px',
-          height: '124px',
+          minHeight: '124px',
           position: 'relative'
         }}
       >
@@ -107,8 +106,8 @@ const Tweet = ({ tweet, onTweetUpdated }) => {
         </div>
 
         {/* Tweet Text */}
-        <div className="mt-3 ml-[4px]">
-          <p className="text-gray-900 text-sm leading-relaxed">
+        <div className="mt-3 ml-[4px] pr-4">
+          <p className="text-gray-900 text-sm leading-relaxed break-words">
             {tweet.content}
           </p>
         </div>

@@ -59,17 +59,16 @@ const TweetForm = ({ onTweetCreated }) => {
 
   return (
     <div 
-      className="bg-white p-4"
+      className="bg-white p-4 w-full max-w-4xl mx-auto"
       style={{
-        width: '653px',
-        height: '210px'
+        minHeight: '210px'
       }}
     >
       {/* Inner Container */}
       <div 
+        className="w-full"
         style={{
-          width: '599px',
-          height: '162px',
+          minHeight: '162px',
           position: 'relative'
         }}
       >
@@ -106,13 +105,13 @@ const TweetForm = ({ onTweetCreated }) => {
             value={content}
             onChange={handleInputChange}
             placeholder="What's happening?"
-            className="border-0 resize-none focus:outline-none focus:ring-0 text-gray-900 placeholder-gray-500"
+            className="border-0 resize-none focus:outline-none focus:ring-0 text-gray-900 placeholder-gray-500 w-full"
             style={{
               position: 'absolute',
               top: '0px',
               left: '52px',
-              width: '547px',
-              height: '104px',
+              right: '120px',
+              minHeight: '104px',
               borderRadius: '8px',
               background: '#12141917',
               padding: '12px'
