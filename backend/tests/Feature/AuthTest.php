@@ -19,8 +19,7 @@ class AuthTest extends TestCase
         $userData = [
             'name' => 'John Doe',
             'email' => 'john@example.com',
-            'password' => 'password123',
-            'password_confirmation' => 'password123'
+            'password' => 'password123'
         ];
 
         $response = $this->postJson('/api/register', $userData);
@@ -54,15 +53,14 @@ class AuthTest extends TestCase
     }
 
     /**
-     * Test user registration with mismatched passwords
+     * Test user registration with minimum password length
      */
-    public function test_user_registration_requires_matching_passwords()
+    public function test_user_registration_requires_minimum_password_length()
     {
         $userData = [
             'name' => 'John Doe',
             'email' => 'john@example.com',
-            'password' => 'password123',
-            'password_confirmation' => 'differentpassword'
+            'password' => '123'
         ];
 
         $response = $this->postJson('/api/register', $userData);
@@ -81,8 +79,7 @@ class AuthTest extends TestCase
         $userData = [
             'name' => 'Jane Doe',
             'email' => 'john@example.com',
-            'password' => 'password123',
-            'password_confirmation' => 'password123'
+            'password' => 'password123'
         ];
 
         $response = $this->postJson('/api/register', $userData);

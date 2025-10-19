@@ -29,8 +29,7 @@ class AuthControllerTest extends TestCase
         $request = Request::create('/api/register', 'POST', [
             'name' => 'John Doe',
             'email' => 'john@example.com',
-            'password' => 'password123',
-            'password_confirmation' => 'password123'
+            'password' => 'password123'
         ]);
 
         $response = $this->authController->register($request);
