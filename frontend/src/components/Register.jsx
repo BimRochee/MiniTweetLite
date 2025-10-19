@@ -28,7 +28,7 @@ const Register = ({ onToggleForm }) => {
     setValidationErrors({});
 
     const result = await register(
-      formData.name,
+      `${formData.name} ${formData.surname}`.trim(),
       formData.email,
       formData.password
     );
@@ -231,7 +231,14 @@ const Register = ({ onToggleForm }) => {
                 lineHeight: '20px'
               }}
             >
-              {loading ? 'Creating account...' : 'Create Account'}
+              {loading ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>
+                  <span>Creating account...</span>
+                </>
+              ) : (
+                'Create Account'
+              )}
             </button>
           </div>
 

@@ -150,22 +150,42 @@ const Login = ({ onToggleForm }) => {
                 position: 'relative'
               }}
             >
-              <span
-                className="text-white"
-                style={{
-                  width: '44px',
-                  height: '20px',
-                  fontFamily: 'Poppins, sans-serif',
-                  fontWeight: 500,
-                  fontSize: '15px',
-                  lineHeight: '20px',
-                  letterSpacing: '0%',
-                  color: '#FFFFFF',
-                  opacity: '1'
-                }}
-              >
-                {loading ? 'Signing in...' : 'Log In'}
-              </span>
+              {loading ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>
+                  <span
+                    className="text-white"
+                    style={{
+                      fontFamily: 'Poppins, sans-serif',
+                      fontWeight: 500,
+                      fontSize: '15px',
+                      lineHeight: '20px',
+                      letterSpacing: '0%',
+                      color: '#FFFFFF',
+                      opacity: '1'
+                    }}
+                  >
+                    Signing in...
+                  </span>
+                </>
+              ) : (
+                <span
+                  className="text-white"
+                  style={{
+                    width: '44px',
+                    height: '20px',
+                    fontFamily: 'Poppins, sans-serif',
+                    fontWeight: 500,
+                    fontSize: '15px',
+                    lineHeight: '20px',
+                    letterSpacing: '0%',
+                    color: '#FFFFFF',
+                    opacity: '1'
+                  }}
+                >
+                  Log In
+                </span>
+              )}
             </button>
           </div>
         </form>

@@ -8,12 +8,15 @@ const Dashboard = () => {
   const { user, logout } = useAuth();
   const [tweets, setTweets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [logoutLoading, setLogoutLoading] = useState(false);
   const [error, setError] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
   const handleLogout = async () => {
+    setLogoutLoading(true);
     await logout();
+    setLogoutLoading(false);
   };
 
   const loadTweets = async (page = 1, append = false) => {
@@ -46,9 +49,6 @@ const Dashboard = () => {
     setTweets(prev => [newTweet, ...prev]);
   };
 
-  const handleTweetDeleted = (deletedTweetId) => {
-    setTweets(prev => prev.filter(tweet => tweet.id !== deletedTweetId));
-  };
 
   const handleTweetUpdated = (tweetId, updatedTweet) => {
     setTweets(prev => 
@@ -72,6 +72,16 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Logout Loading Modal */}
+      {logoutLoading && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 flex flex-col items-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-2 border-gray-300 border-t-black mb-4"></div>
+            <p className="text-black font-medium">Logging out...</p>
+          </div>
+        </div>
+      )}
+
       {/* Navigation */}
       <nav className="bg-white sticky top-0 z-10">
         <div 
@@ -122,6 +132,7 @@ const Dashboard = () => {
             {/* Logout Button */}
             <button
               onClick={handleLogout}
+              disabled={logoutLoading}
               style={{
                 width: '112px',
                 height: '40px',
@@ -142,11 +153,12 @@ const Dashboard = () => {
                 fontWeight: '500',
                 lineHeight: '20px',
                 letterSpacing: '0%',
-                cursor: 'pointer',
-                transition: 'color 0.2s ease'
+                cursor: logoutLoading ? 'not-allowed' : 'pointer',
+                transition: 'color 0.2s ease',
+                opacity: logoutLoading ? '0.6' : '1'
               }}
-              onMouseEnter={(e) => e.target.style.color = '#EF4444'}
-              onMouseLeave={(e) => e.target.style.color = '#121419'}
+              onMouseEnter={(e) => !logoutLoading && (e.target.style.color = '#EF4444')}
+              onMouseLeave={(e) => !logoutLoading && (e.target.style.color = '#121419')}
             >
               {/* Logout Icon */}
               <svg 
@@ -191,8 +203,8 @@ const Dashboard = () => {
         {/* Loading State */}
         {loading && tweets.length === 0 && (
           <div className="flex justify-center items-center py-8">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-            <span className="ml-2 text-gray-600">Loading tweets...</span>
+            <div className="animate-spin rounded-full h-8 w-8 border-2 border-gray-300 border-t-black"></div>
+            <span className="ml-2 text-black font-medium">Loading tweets...</span>
           </div>
         )}
 
@@ -205,27 +217,34 @@ const Dashboard = () => {
             </div>
           )}
 
-          {tweets.map((tweet) => (
-            <Tweet
-              key={tweet.id}
-              tweet={tweet}
-              onTweetDeleted={handleTweetDeleted}
-              onTweetUpdated={handleTweetUpdated}
-            />
-          ))}
+                  {tweets.map((tweet) => (
+                    <Tweet
+                      key={tweet.id}
+                      tweet={tweet}
+                      onTweetUpdated={handleTweetUpdated}
+                    />
+                  ))}
 
-          {/* Load More Button */}
-          {hasMore && tweets.length > 0 && (
-            <div className="p-4 text-center">
-              <button
-                onClick={loadMoreTweets}
-                disabled={loading}
-                className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-6 py-2 rounded-full text-sm font-medium transition-colors"
-              >
-                {loading ? 'Loading...' : 'Load More'}
-              </button>
-            </div>
-          )}
+              {/* Load More Button */}
+              {hasMore && tweets.length > 0 && (
+                <div className="p-4 text-center">
+                  <button
+                    onClick={loadMoreTweets}
+                    disabled={loading}
+                    className="bg-black hover:bg-gray-800 disabled:bg-gray-400 text-white px-6 py-2 rounded-full text-sm font-medium transition-colors flex items-center justify-center mx-auto"
+                    style={{ minWidth: '120px' }}
+                  >
+                    {loading ? (
+                      <>
+                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>
+                        Loading...
+                      </>
+                    ) : (
+                      'Load More'
+                    )}
+                  </button>
+                </div>
+              )}
         </div>
       </div>
     </div>

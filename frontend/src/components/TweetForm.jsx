@@ -59,7 +59,7 @@ const TweetForm = ({ onTweetCreated }) => {
 
   return (
     <div 
-      className="bg-white border-b border-gray-200 p-4"
+      className="bg-white p-4"
       style={{
         width: '653px',
         height: '210px'
@@ -163,7 +163,12 @@ const TweetForm = ({ onTweetCreated }) => {
             onMouseEnter={(e) => !e.target.disabled && (e.target.style.background = '#000000')}
             onMouseLeave={(e) => !e.target.disabled && (e.target.style.background = '#121419')}
           >
-            {isLoading ? 'Posting...' : (
+            {isLoading ? (
+              <>
+                <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>
+                Posting...
+              </>
+            ) : (
               <>
                 {/* Tweet Icon - Airplane/Send */}
                 <svg 

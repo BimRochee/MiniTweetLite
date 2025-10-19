@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './contexts/AuthContext.jsx';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
@@ -8,6 +8,13 @@ function AppContent() {
   const { isAuthenticated, loading } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Reset to login form when user logs out
+  useEffect(() => {
+    if (!isAuthenticated && !loading) {
+      setIsLogin(true);
+    }
+  }, [isAuthenticated, loading]);
 
   const handleToggleForm = (newIsLogin) => {
     setIsTransitioning(true);
@@ -19,10 +26,10 @@ function AppContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-2 border-gray-300 border-t-black mx-auto"></div>
+          <p className="mt-4 text-black font-medium">Loading...</p>
         </div>
       </div>
     );
